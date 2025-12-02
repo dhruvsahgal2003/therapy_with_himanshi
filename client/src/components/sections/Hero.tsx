@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "wouter";
-import heroImage from "@assets/generated_images/a_soft,_professional_portrait_placeholder_for_a_psychologist_website..png";
+import heroImage from "@assets/Screenshot_2025-12-02_at_8.57.54_PM_1764689278406.png";
 
 export function Hero() {
   return (
