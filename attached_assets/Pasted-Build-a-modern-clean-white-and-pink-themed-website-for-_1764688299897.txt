@@ -1,0 +1,63 @@
+Build a modern, clean, white-and-pink themed website for a psychologist named Himanshi. The design vibe should feel warm, soft, and comforting, with rounded cards, pastel gradients, and minimal clutter. The site should be fully responsive.
+Pages / Sections Needed:
+1. Hero Section
+Photo placeholder for Himanshi (IG handle: @therapy.w.himanshi — pull inspiration for styling and tone, but do NOT scrape posts directly; just mirror her aesthetic: soft pinks, minimal text, calming vibes).
+Headline: “Therapy with Himanshi”
+Subheadline: “A safe space for healing, growth, and emotional clarity.”
+CTA buttons:
+Book a Session (opens Cal.com booking widget)
+Contact Me (scrolls to form)
+2. About Section
+Brief intro about her work as a psychologist.
+Clean two-column layout: image + text.
+Soft pink gradient background.
+(Use placeholder text but structure it so we can later swap with real bio.)
+3. Services Section
+Create styled service cards such as:
+One-on-One Therapy
+Anxiety & Stress Counseling
+Relationship Counseling
+Teen/Young Adult Therapy
+Online Sessions Available
+Each card should have:
+Icon
+Short description
+“Book Now” button → opens Cal.com
+4. Booking Integration
+Embed Cal.com for appointments.
+Include a dedicated page /book that contains the full Cal.com embed.
+All “Book Now” buttons should link here.
+5. Payment Integration
+Add Razorpay Checkout integration.
+Create a /payment page with:
+Session fee placeholder
+Razorpay payment button
+On success → redirect to Cal.com booking
+On failure → show an inline error
+Make the Razorpay integration modular so we can plug in keys easily.
+6. Contact / Reach-out Form
+Name
+Email
+Phone
+Message
+Store responses in a simple backend (Node/Express or Python FastAPI).
+Add email notifications (use Replit email or any SMTP).
+Soft pink accent, floating labels, success animation.
+7. Footer
+Instagram link: @therapy.w.himanshi
+Email placeholder
+Cal.com booking link
+Soft pink minimal footer bar
+Extra Requirements
+Use HTML + CSS + JS or a lightweight framework like Next.js.
+Keep color palette: #ffffff, #ffc7df, #ff8eb3 (adjust as needed).
+Modern animations (fade-up, smooth transitions).
+Clean typography: Inter, Poppins, or similar.
+Deliverables
+Full project structure
+Working Cal.com embed
+Razorpay integration
+Contact form with backend
+Responsive design
+Placeholder content that matches the calm therapy vibe
+Easy config file for environment variables (Razorpay keys, Cal.com link)
