@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import logo from "@assets/ChatGPT_Image_Dec_2,_2025_at_09_20_14_PM_1764690628983.png";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,9 +20,10 @@ export function Navbar() {
     <nav className="sticky top-0 z-50 w-full border-b bg-white/80 backdrop-blur-md supports-[backdrop-filter]:bg-white/60">
       <div className="container mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <span className="font-heading font-bold text-xl md:text-2xl tracking-tight text-foreground">
-            Therapy with <span className="text-primary">Himanshi</span>
+        <Link href="/" className="flex items-center gap-3">
+          <img src={logo} alt="Therapy with Himanshi" className="h-10 w-10" />
+          <span className="font-heading font-bold text-sm md:text-lg tracking-tight text-foreground hidden sm:inline">
+            Himanshi
           </span>
         </Link>
 
