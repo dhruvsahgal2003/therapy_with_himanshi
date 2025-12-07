@@ -24,7 +24,7 @@ export default function Book() {
           <div className="bg-white rounded-3xl shadow-xl overflow-hidden border border-border/50 min-h-[600px]">
             {/* Cal.com Embed - Add your Cal.com link here */}
             <iframe
-              src="https://cal.com/himanshi"
+              src="https://cal.com/himanshi-sahni/60min"
               width="100%"
               height="600"
               frameBorder="0"
