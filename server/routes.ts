@@ -8,13 +8,27 @@ import crypto from "crypto";
 let razorpayInstance: Razorpay | null = null;
 
 function getRazorpay(): Razorpay | null {
-  if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+  const keyId = process.env.RAZORPAY_KEY_ID?.trim();
+  const keySecret = process.env.RAZORPAY_KEY_SECRET?.trim();
+  
+  if (!keyId || !keySecret) {
+    console.error("Razorpay credentials missing:", { 
+      hasKeyId: !!keyId, 
+      hasKeySecret: !!keySecret,
+      keyIdPrefix: keyId?.substring(0, 10) 
+    });
     return null;
   }
+  
+  if (!keyId.startsWith('rzp_')) {
+    console.error("Invalid Razorpay key format. Key should start with 'rzp_'");
+    return null;
+  }
+  
   if (!razorpayInstance) {
     razorpayInstance = new Razorpay({
-      key_id: process.env.RAZORPAY_KEY_ID,
-      key_secret: process.env.RAZORPAY_KEY_SECRET,
+      key_id: keyId,
+      key_secret: keySecret,
     });
   }
   return razorpayInstance;
@@ -49,6 +63,18 @@ export async function registerRoutes(
 
   app.get("/api/services", async (req, res) => {
     res.json(services);
+  });
+
+  app.get("/api/health", async (req, res) => {
+    const keyId = process.env.RAZORPAY_KEY_ID?.trim();
+    res.json({
+      status: "ok",
+      razorpay: {
+        configured: !!keyId && !!process.env.RAZORPAY_KEY_SECRET,
+        keyIdPrefix: keyId?.substring(0, 12) || "not set",
+        keyIdValid: keyId?.startsWith('rzp_') || false
+      }
+    });
   });
 
   app.post("/api/payments/create-order", async (req: Request, res: Response) => {
