@@ -94,7 +94,8 @@ export async function registerRoutes(
       });
     } catch (error: any) {
       console.error("Error creating order:", error);
-      res.status(500).json({ error: "Failed to create payment order" });
+      const errorMessage = error?.error?.description || error?.message || "Failed to create payment order";
+      res.status(500).json({ error: errorMessage });
     }
   });
 
