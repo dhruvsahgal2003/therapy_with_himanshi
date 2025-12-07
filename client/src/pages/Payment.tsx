@@ -3,23 +3,61 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle2, AlertCircle } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
+
+declare global {
+  interface Window {
+    Razorpay: any;
+  }
+}
 
 export default function Payment() {
   const [status, setStatus] = useState<"idle" | "processing" | "success" | "error">("idle");
   const [, setLocation] = useLocation();
 
-  const handlePayment = () => {
+  useEffect(() => {
+    // Load Razorpay script
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    document.head.appendChild(script);
+  }, []);
+
+  const handlePayment = async () => {
     setStatus("processing");
-    // Simulate Razorpay payment delay
-    setTimeout(() => {
-      setStatus("success");
-      // Redirect to booking after success
-      setTimeout(() => {
-        setLocation("/book");
-      }, 2000);
-    }, 2000);
+    
+    try {
+      const options = {
+        key: process.env.VITE_RAZORPAY_KEY_ID || "rzp_test_1DP5mmOlF5G0M3",
+        amount: 150000, // ₹1,500 in paise
+        currency: "INR",
+        name: "Therapy with Himanshi",
+        description: "50-minute Therapy Session",
+        handler: function (response: any) {
+          setStatus("success");
+          setTimeout(() => {
+            setLocation("/book");
+          }, 2000);
+        },
+        prefill: {
+          email: "client@example.com",
+          contact: "+919999999999",
+        },
+        theme: {
+          color: "#ff8eb3",
+        },
+      };
+
+      if (window.Razorpay) {
+        const razorpay = new window.Razorpay(options);
+        razorpay.open();
+      } else {
+        throw new Error("Razorpay failed to load");
+      }
+    } catch (error) {
+      setStatus("error");
+    }
   };
 
   return (
